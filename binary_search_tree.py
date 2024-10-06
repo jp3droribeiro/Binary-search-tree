@@ -70,4 +70,36 @@ class BinarySearchTree:
                 queue.append(node.right)
         return result
     
-##
+
+
+    def plot_tree(self):
+        plt.figure(figsize=(12, 6))
+
+        # Subplot para a árvore
+        plt.subplot(1, 2, 1)
+        graph = nx.Graph()
+        self._build_tree_graph(graph, self.root)
+        pos = self._generate_positions(graph)
+        labels = {node: node.key for node in graph.nodes()}
+        nx.draw(graph, pos, labels=labels, with_labels=True, node_size=700, node_color="skyblue", font_size=8)
+        plt.title('Árvore de Busca Binária')
+
+        # Subplot para os resultados dos percursos
+        plt.subplot(1, 2, 2)
+        in_order = self.inorder_traversal()
+        post_order = self.postorder_traversal()
+        pre_order = self.preorder_traversal()
+        breadth_first = self.breadth_first_traversal()
+
+        plt.text(0.5, 0.9, 'Em-ordem: ' + str(in_order), ha='center', va='center', fontsize=10, bbox=dict(facecolor='red', alpha=0.5), transform=plt.gca().transAxes)
+        plt.text(0.5, 0.8, 'Pós-ordem: ' + str(post_order), ha='center', va='center', fontsize=10, bbox=dict(facecolor='green', alpha=0.5), transform=plt.gca().transAxes)
+        plt.text(0.5, 0.7, 'Pré-ordem: ' + str(pre_order), ha='center', va='center', fontsize=10, bbox=dict(facecolor='yellow', alpha=0.5), transform=plt.gca().transAxes)
+        plt.text(0.5, 0.6, 'Largura: ' + str(breadth_first), ha='center', va='center', fontsize=10, bbox=dict(facecolor='white', alpha=0.5), transform=plt.gca().transAxes)
+        plt.title('Resultados dos Percursos')
+
+        plt.tight_layout()
+
+        buf = BytesIO()
+        plt.savefig(buf, format="png")
+        buf.seek(0)
+        return buf

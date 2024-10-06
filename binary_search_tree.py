@@ -75,7 +75,7 @@ class BinarySearchTree:
     def plot_tree(self):
         plt.figure(figsize=(12, 6))
 
-        # Subplot para a árvore
+
         plt.subplot(1, 2, 1)
         graph = nx.Graph()
         self._build_tree_graph(graph, self.root)
@@ -84,7 +84,7 @@ class BinarySearchTree:
         nx.draw(graph, pos, labels=labels, with_labels=True, node_size=700, node_color="skyblue", font_size=8)
         plt.title('Árvore de Busca Binária')
 
-        # Subplot para os resultados dos percursos
+        
         plt.subplot(1, 2, 2)
         in_order = self.inorder_traversal()
         post_order = self.postorder_traversal()
@@ -99,7 +99,8 @@ class BinarySearchTree:
 
         plt.tight_layout()
 
-        buf = BytesIO()
+    # CREATE  A BUFFER TO SAVE FIGURE
+        buf = BytesIO() 
         plt.savefig(buf, format="png")
         buf.seek(0)
         return buf
@@ -130,4 +131,33 @@ class BinarySearchTree:
 
         return pos
     
+
+# Interface do Streamlit
+
+st.set_page_config(
+    page_title="Árvore de Busca Binária",
+    page_icon=" ",
+    layout="centered",
+    initial_sidebar_state='expanded',
+    menu_items={
+        'About': ''
+    }
+)
+st.title("Árvore de Busca Binária")
+
+input_sequence = st.text_input("Digite a sequência de números separados por espaço:")
+submit = st.button("Inserir na Árvore")
+
+if submit:
     
+    elements = list(map(int, input_sequence.split()))
+    arvore = BinarySearchTree()
+    
+    for element in elements:
+        arvore.insert(element)
+    
+    st.write("Árvore gerada:")
+    buf = arvore.plot_tree()
+    st.image(buf)
+
+

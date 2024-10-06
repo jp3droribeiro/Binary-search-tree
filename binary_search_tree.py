@@ -103,3 +103,31 @@ class BinarySearchTree:
         plt.savefig(buf, format="png")
         buf.seek(0)
         return buf
+    
+    def _build_tree_graph(self, graph, root):
+        if root:
+            graph.add_node(root)
+            if root.left:
+                graph.add_edge(root, root.left)
+                self._build_tree_graph(graph, root.left)
+            if root.right:
+                graph.add_edge(root, root.right)
+                self._build_tree_graph(graph, root.right)
+
+    def _generate_positions(self, graph):
+        pos = {}
+        queue = [(self.root, 0, 0)]
+
+        while queue:
+            node, depth, offset = queue.pop(0)
+            if node not in pos:
+                pos[node] = (offset, -depth)
+
+            if node.left:
+                queue.append((node.left, depth + 1, offset - 1))
+            if node.right:
+                queue.append((node.right, depth + 1, offset + 1))
+
+        return pos
+    
+    

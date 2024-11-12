@@ -2,7 +2,9 @@ import streamlit as st
 import networkx as nx
 import matplotlib.pyplot as plt
 from io import BytesIO
+import os  
 
+os.system('streamlit run binary_search_tree.py --server.port $PORT')
 
 class Node:
     def __init__(self, key):

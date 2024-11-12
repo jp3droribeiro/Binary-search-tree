@@ -1,0 +1,16 @@
+{
+    "builds": [
+
+        {
+            "src": "binary_search_tree.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+
+        {
+            "src": "/(.*)",
+            "dest": "binary_search_tree.py"
+        }
+    ]
+}

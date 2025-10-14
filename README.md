@@ -1,4 +1,4 @@
-# 🌳 Interactive Binary Search Tree Visualization
+#  Interactive Binary Search Tree Visualization
 
 ## Overview
 This project is an **interactive visualization** of a **Binary Search Tree (BST)** developed using **Python**, **Streamlit**, **NetworkX**, and **Matplotlib**.  
